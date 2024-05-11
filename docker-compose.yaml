@@ -1,0 +1,18 @@
+services:
+  backend:
+    container_name: gnn_backend
+    restart: on-failure
+    build: ./backend
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    container_name: gnn_frontend
+    restart: on-failure
+    ports:
+      - "3002:3000"
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
