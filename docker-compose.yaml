@@ -1,10 +1,33 @@
 services:
+  mongo:
+    image: mongo
+    container_name: gnn_mongo
+    restart: on-failure
+    volumes:
+      - ./dbs:/dbs
+
+  mongo_dash:
+    container_name: gnn_mongo_dash
+    restart: on-failure
+    image: mongo-express
+    ports:
+      - "8002:8002"
+    environment:
+      - PORT=8002
+      - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+      - ME_CONFIG_BASICAUTH_USERNAME=hossara
+      - ME_CONFIG_BASICAUTH_PASSWORD=1234
+      - ME_CONFIG_MONGODB_URL=mongodb://gnn_mongo:27017
+
   backend:
     container_name: gnn_backend
     restart: on-failure
     build: ./backend
     volumes:
       - ./backend:/app
+    depends_on:
+      - mongo
+      - mongo_dash
 
   frontend:
     container_name: gnn_frontend
@@ -15,4 +38,6 @@ services:
     volumes:
       - ./frontend:/app
     depends_on:
+      - mongo
+      - mongo_dash
       - backend
