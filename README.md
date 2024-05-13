@@ -1,4 +1,4 @@
-# Full-stack GraphQL+Nest.js+Nuxt3 
+# TodoList webapp 
 This project is a practice project to learn how to use GraphQL in Nuxt 3 and Nestjs.
 
 # Run and Test
