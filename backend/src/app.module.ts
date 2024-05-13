@@ -3,6 +3,9 @@ import {Logger} from "./main"
 import {Module} from "@nestjs/common"
 import env from "./config/env"
 import {ConfigModule} from "@nestjs/config"
+import {GraphQLModule} from "@nestjs/graphql"
+import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo"
+import {TasksModule} from "./modules/tasks/tasks.module"
 
 @Module({
   imports: [
@@ -22,8 +25,15 @@ import {ConfigModule} from "@nestjs/config"
         }
       }
     }),
+
+    // Modules
+    TasksModule,
+
+    // GraphQL Config
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+    }),
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
