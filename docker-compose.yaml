@@ -18,11 +18,15 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=hossara
       - ME_CONFIG_BASICAUTH_PASSWORD=1234
       - ME_CONFIG_MONGODB_URL=mongodb://gnn_mongo:27017
+    depends_on:
+      - mongo
 
   backend:
     container_name: gnn_backend
     restart: on-failure
     build: ./backend
+    ports:
+      - "8081:8081"
     volumes:
       - ./backend:/app
     depends_on:
