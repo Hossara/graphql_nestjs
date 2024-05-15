@@ -32,7 +32,8 @@ import {TasksModule} from "./modules/tasks/tasks.module"
     // GraphQL Config
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true,
+      autoSchemaFile: 'src/schema.gql',
+      playground: true,
     }),
   ],
 })

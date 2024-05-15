@@ -1,0 +1,33 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Task schema"""
+type Task {
+  id: ID!
+  name: String!
+  done: Boolean!
+  created_date: Date!
+  expiration_date: Date
+  description: String
+  priority: Int
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  tasks: [Task!]!
+}
+
+type Mutation {
+  addRecipe(new_task: TaskInput!): Task!
+}
+
+input TaskInput {
+  name: String!
+  created_date: Date!
+  expiration_date: Date
+  description: String
+  priority: Int
+}
