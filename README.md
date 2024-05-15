@@ -20,8 +20,9 @@ docker compose down
 
 ### Ports
 
-| Port |  Usage   | Expose? |
-|:----:|:--------:|:-------:|
-| 3002 | Frontend |   Yes   |
-| 8081 | Backend  |   No    |
-| ---- | MongoDB  |   No    |
+| Port  |       Usage       | Expose? |
+|:-----:|:-----------------:|:-------:|
+| 3002  |     Frontend      |   Yes   |
+| 8081  |      Backend      |   No    |
+| 27017 |      MongoDB      |   No    |
+| 8002  | MongoDB dashboard |   Yes   |
