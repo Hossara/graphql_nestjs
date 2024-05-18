@@ -1,0 +1,9 @@
+query allTasks {
+    tasks {
+        name
+        created_date
+        priority
+        done
+        expiration_date
+    }
+}

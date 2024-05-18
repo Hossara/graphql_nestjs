@@ -1,0 +1,2 @@
+schema: ../../backend/src/schema.gql
+documents: '**/*.gql'
