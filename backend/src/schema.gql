@@ -21,7 +21,7 @@ type Query {
 }
 
 type Mutation {
-  addRecipe(new_task: TaskInput!): Task!
+  addTask(new_task: TaskInput!): Task!
 }
 
 input TaskInput {

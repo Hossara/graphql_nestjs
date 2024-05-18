@@ -1,10 +1,10 @@
 import {Field, InputType, Int} from "@nestjs/graphql"
-import {IsOptional, Length, MaxLength} from "class-validator"
+import {IsOptional, Length, MaxLength, MinLength} from "class-validator"
 
 @InputType()
 export class TaskInput {
     @Field()
-    @MaxLength(100)
+    @Length(3, 100)
     name: string
 
     @Field(() => Date)
@@ -16,7 +16,7 @@ export class TaskInput {
 
     @Field({ nullable: true })
     @IsOptional()
-    @MaxLength(500)
+    @Length(3, 500)
     description?: string
 
     @Field(() => Int, { nullable: true })

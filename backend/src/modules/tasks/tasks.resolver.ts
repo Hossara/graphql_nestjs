@@ -13,7 +13,7 @@ export class TasksResolver {
     }
 
     @Mutation(() => Task)
-    async addRecipe(
+    async addTask(
         @Args('new_task') new_task: TaskInput,
     ) {
         return await this.tasksService.insert(taskInputToSchema(new_task))
