@@ -3,8 +3,8 @@ services:
     image: mongo
     container_name: gnn_mongo
     restart: on-failure
-    volumes:
-      - ./dbs:/dbs
+    networks:
+      - gnn_network
 
   mongo_dash:
     container_name: gnn_mongo_dash
@@ -12,6 +12,8 @@ services:
     image: mongo-express
     ports:
       - "8002:8002"
+    networks:
+      - gnn_network
     environment:
       - PORT=8002
       - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
@@ -27,11 +29,18 @@ services:
     build: ./backend
     ports:
       - "8081:8081"
+    networks:
+      - gnn_network
     volumes:
       - ./backend:/app
     depends_on:
       - mongo
       - mongo_dash
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
+      interval: 10s
+      timeout: 14s
+      retries: 5
 
   frontend:
     container_name: gnn_frontend
@@ -39,9 +48,14 @@ services:
     ports:
       - "3002:3000"
     build: ./frontend
+    networks:
+      - gnn_network
     volumes:
       - ./frontend:/app
     depends_on:
-      - mongo
-      - mongo_dash
-      - backend
+      backend:
+        condition: service_healthy
+
+networks:
+  gnn_network:
+    name: gnn_network

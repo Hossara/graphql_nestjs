@@ -6,6 +6,7 @@ import {ConfigModule} from "@nestjs/config"
 import {GraphQLModule} from "@nestjs/graphql"
 import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo"
 import {TasksModule} from "./modules/tasks/tasks.module"
+import {AppController} from "./app.controller"
 
 @Module({
   imports: [
@@ -36,5 +37,6 @@ import {TasksModule} from "./modules/tasks/tasks.module"
       playground: true,
     }),
   ],
+  controllers: [AppController]
 })
 export class AppModule {}
