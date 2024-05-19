@@ -1,6 +1,0 @@
-mutation addTask($task: TaskInput!) {
-    addTask(new_task: $task) {
-        id
-        name
-    }
-}

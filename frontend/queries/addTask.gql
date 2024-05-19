@@ -1,0 +1,7 @@
+mutation addNewTask($task: TaskInput!) {
+    addTask(new_task: $task) {
+        id
+        name
+        expiration_date
+    }
+}
