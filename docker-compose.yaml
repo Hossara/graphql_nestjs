@@ -29,6 +29,7 @@ services:
     build: ./backend
     ports:
       - "8081:8081"
+      - "3002:3000"
     networks:
       - gnn_network
     volumes:
@@ -45,11 +46,8 @@ services:
   frontend:
     container_name: gnn_frontend
     restart: on-failure
-    ports:
-      - "3002:3000"
     build: ./frontend
-    networks:
-      - gnn_network
+    network_mode: "service:backend"
     volumes:
       - ./frontend:/app
     depends_on:
