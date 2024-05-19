@@ -7,6 +7,7 @@ import {GraphQLModule} from "@nestjs/graphql"
 import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo"
 import {TasksModule} from "./modules/tasks/tasks.module"
 import {AppController} from "./app.controller"
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 
 @Module({
   imports: [
@@ -34,7 +35,8 @@ import {AppController} from "./app.controller"
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/schema.gql',
-      playground: true,
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
   ],
   controllers: [AppController]
