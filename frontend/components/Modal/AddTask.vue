@@ -3,16 +3,18 @@ import { z } from 'zod'
 import {format} from "date-fns"
 
 const props = defineProps<{ is_open: boolean }>()
-defineEmits(["close"])
+const emit = defineEmits(["close", "refresh"])
 
 const modalIsOpen = computed(() => props.is_open)
 
-const state = reactive({
+const initialState = {
   name: undefined,
   description: undefined,
   date: null,
-  priority: 0
-})
+  priority: 1
+}
+
+const state = reactive({... initialState})
 
 const schema = z.object({
   name: z.string()
@@ -23,21 +25,21 @@ const schema = z.object({
       .max(500, "Task description must be at least 100 characters")
 })
 
+
 const submit = async () => {
-
-
-  await GqlAddTask({
+  await GqlAddNewTask({
     task: {
-      "name": "first task",
-      "created_date": new Date(),
-      "description": "test",
-      "priority": 1
+      name: state.name,
+      description: "test",
+      priority: 1,
+      created_date: new Date().toDateString(),
+      expiration_date: new Date().toDateString()
     }
-  }).then((value) => {
-    console.log(value.addTask)
-  }).catch(reason => {
-    console.log(reason)
   })
+
+  emit("close")
+  emit("refresh")
+  Object.assign(state, initialState)
 }
 </script>
 
