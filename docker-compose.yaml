@@ -3,6 +3,8 @@ services:
     image: mongo
     container_name: gnn_mongo
     restart: on-failure
+    volumes:
+      - gnn_mongo:/data/db
     networks:
       - gnn_network
 
@@ -29,7 +31,6 @@ services:
     build: ./backend
     ports:
       - "8081:8081"
-      - "3002:3000"
     networks:
       - gnn_network
     volumes:
@@ -47,7 +48,10 @@ services:
     container_name: gnn_frontend
     restart: on-failure
     build: ./frontend
-    network_mode: "service:backend"
+    ports:
+      - "3002:3000"
+    networks:
+      - gnn_network
     volumes:
       - ./frontend:/app
     depends_on:
@@ -57,3 +61,7 @@ services:
 networks:
   gnn_network:
     name: gnn_network
+
+volumes:
+  gnn_mongo:
+    external: true
