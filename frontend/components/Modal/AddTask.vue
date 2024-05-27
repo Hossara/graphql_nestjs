@@ -12,6 +12,11 @@ const initialState = {
   description: undefined,
   date: null,
   priority: 1
+} as {
+  name: string | undefined,
+  description: string | undefined,
+  date: Date | null,
+  priority: number | undefined
 }
 
 const state = reactive({... initialState})
@@ -29,11 +34,11 @@ const schema = z.object({
 const submit = async () => {
   await GqlAddNewTask({
     task: {
-      name: state.name,
-      description: "test",
-      priority: 1,
+      name: state.name!,
+      description: state.description,
+      priority: state.priority,
       created_date: new Date().toDateString(),
-      expiration_date: new Date().toDateString()
+      expiration_date: state.date
     }
   })
 
