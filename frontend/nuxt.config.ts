@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui", "@samk-dev/nuxt-vcalendar", "nuxt-graphql-client"],
+  css: ['~/assets/style/main.css', '~/assets/fonts/inter.css'],
   ui: {
     icons: ['fluent']
   },
