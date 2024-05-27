@@ -1,5 +1,5 @@
 <template>
-  <main class="box-border h-[100dvh] w-full p-5">
+  <main class="box-border h-[100dvh] w-full">
     <NuxtPage/>
   </main>
 </template>
